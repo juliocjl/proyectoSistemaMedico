@@ -1,18 +1,25 @@
 <?php
-    include 'conexion.php';
+    include 'conexion.php';// conexion a la BD
+    include 'c_aes.php';// Contiene la funcion para cifrar los datos, se usa AES-128-CBC
 
-    $nombre = $_POST["nombre"];    
-    $apellido1 =$_POST['apellido1'];
-    $apellido2 =$_POST['apellido2'];
+
     $correo=$_POST['correo'];
     $pass=$_POST['pass'];
-    $tipoPersonal=$_POST['tipoPersonal'];
-    $direccion=$_POST['direccion'];
-    $cp=$_POST['cp'];
-    $telefono=$_POST['telefono'];
-    $curp=$_POST['curp'];
-    $rfc=$_POST['rfc'];
-    $area=$_POST['area'];
+
+    //Se genera el vector de inicializacion, para guardarlo en la BD
+    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-128-cbc'));
+
+    /****   Se cifran todos los datos sensibles    ****/
+    $nombre = encrypt_aes($_POST["nombre"], $pass, $iv);
+    $apellido1 = encrypt_aes($_POST['apellido1'], $pass, $iv);
+    $apellido2 = encrypt_aes($_POST['apellido2'], $pass, $iv);
+    $tipoPersonal = encrypt_aes($_POST['tipoPersonal'], $pass, $iv);
+    $direccion = encrypt_aes($_POST['direccion'], $pass, $iv);
+    $cp = encrypt_aes($_POST['cp'], $pass, $iv);
+    $telefono = encrypt_aes($_POST['telefono'], $pass, $iv);
+    $curp = encrypt_aes($_POST['curp'], $pass, $iv);
+    $rfc = encrypt_aes($_POST['rfc'], $pass, $iv);
+    $area = encrypt_aes($_POST['area'], $pass, $iv);
 
  //Se verifica primero que no exista un usuario con la misma curp y correo
     $verifica_usuario = mysqli_query($conexion, "SELECT * FROM pacientes WHERE correo = '$correo'");
@@ -20,14 +27,14 @@
         echo "El usuario ya existe en el registro";
         exit;
     }else{
-        /**Se cifra la contraseña */
-        $passCifrado = password_hash($pass, PASSWORD_DEFAULT, ['cost'=>10]);
+        /* Se obtiene el Hash de la contraseña */
+        $passCifrado = password_hash($pass, PASSWORD_DEFAULT);
 
-        /*  Se insertan los datos del formulario en la base de datos */ 
+        /*  Se insertan los datos cifrados en la base de datos */ 
         $comando="INSERT INTO personalmedico(nombre, apellidoP, apellidoM, correo, pass, 
-                                            tipoPersonal, direccion, cp, telefono, curp, rfc, area) 
+                                            tipoPersonal, direccion, cp, telefono, curp, rfc, area, iv) 
                             VALUES('$nombre','$apellido1', '$apellido2', '$correo', '$passCifrado', 
-                            '$tipoPersonal', '$direccion','$cp', '$telefono', '$curp', '$rfc', '$area')";
+                            '$tipoPersonal', '$direccion','$cp', '$telefono', '$curp', '$rfc', '$area', '$iv')";
 
         $ejecutar = mysqli_query($conexion, $comando);
 

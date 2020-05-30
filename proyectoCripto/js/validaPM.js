@@ -1,8 +1,8 @@
 function validarPM() {
-    var nombre = document.getElementById('nombre').value;/*,
+    var nombre = document.getElementById('nombre').value;,
     apellido1 = document.getElementById('apellido1').value, 
     apellido2 = document.getElementById('apellido2').value
-    correo = document.getElementById('correo').value, exp = /\w+@\w+\.[a-z]/
+    correo = document.getElementById('correo').value, exp = /\w+@\w+\.[a-z]/,
     pass = document.getElementById('pass').value,
     personal = document.getElementById('personal').value, 
     direccion = document.getElementById('direccion').value,
@@ -11,13 +11,13 @@ function validarPM() {
     rfc = document.getElementById('rfc').value,
     tipoPersonal = document.getElementById('tipoPersonal'),
     area = document.getElementById('area').value
-    ; */
+    ;
 
 
     if ( nombre === "" || nombre.length > 30 || nombre.length < 4) {
         alert("Verificar el campo nombre. ");
         return false;
-    }/*
+    }
     else if (apellido1 === "" || apellido2 === "" || apellido1.length > 30 || apellido2.length > 30){
             alert("Verificar los campos apellido.");
             return false;
@@ -48,7 +48,7 @@ function validarPM() {
     }else if(fecha ==="" || area ==="" ){
         alert("Rellene campo fecha y area");
         return false;
-    }*/
+    }
     else{
         alert("Formulario llenado correctamente");
     }

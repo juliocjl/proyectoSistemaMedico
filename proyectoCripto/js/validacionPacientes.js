@@ -1,8 +1,8 @@
 function validarP() {
-    var nombre = document.getElementById('nombre').value;/*,
+    var nombre = document.getElementById('nombre').value;,
     apellido1 = document.getElementById('apellido1').value, 
     apellido2 = document.getElementById('apellido2').value
-    correo = document.getElementById('correo').value, exp = /\w+@\w+\.[a-z]/
+    correo = document.getElementById('correo').value, exp = /\w+@\w+\.[a-z]/,
     pass = document.getElementById('pass').value,
     sexo = document.getElementById('sexo').value, 
     curp = document.getElementById('curp').value, 
@@ -12,14 +12,13 @@ function validarP() {
     altura = document.getElementById('altura').value, 
     peso= document.getElementById('peso').value,
     area = document.getElementById('area').value,
-    fecha = document.getElementById('fecha').value
-    ; */
+    fecha = document.getElementById('fecha').value; 
 
 
     if ( nombre === "" || nombre.length > 30 || nombre.length < 4) {
         alert("Verificar el campo nombre. ");
         return false;
-    }/*
+    }
     else if (apellido1 === "" || apellido2 === "" || apellido1.length > 30 || apellido2.length > 30){
             alert("Verificar los campos apellido.");
             return false;
@@ -50,7 +49,7 @@ function validarP() {
     }else if(fecha ==="" || area ==="" ){
         alert("Rellene campo fecha y area");
         return false;
-    }*/
+    }
     else{
         alert("Formulario llenado correctamente");
     }

@@ -1,5 +1,4 @@
 <?php
-    //if (isset($_POST('submit') )) {
         include 'conexion.php';
 
         $usuario = $_POST['usuario'];
@@ -7,33 +6,27 @@
 
         echo "<br /> $usuario : ".$passLogin . "<br />";
         
-        //Se verifica primero que no exista un usuario con la misma curp, correo o rfc
-        //  Se realiza consulta a tabla de pasientes
+        //Se verifica primero que no exista un usuario con el mismo correo
+        //  Se realiza consulta a tabla de pacientes
 
         $consultaPaciente = "SELECT * FROM pacientes WHERE correo = '$usuario'";
         $verifica_usuario_paciente = mysqli_query($conexion, $consultaPaciente);
-        $filasPacientes = mysqli_num_rows($verifica_usuario_paciente);
-        echo "<br />".$filasPacientes. "<br />";
+        $filasPacientes = mysqli_num_rows($verifica_usuario_paciente); //Se almacena numero de filas
 
-        //  Se realiza consulta a tabla de pasientes
+        //  Se realiza consulta a tabla de personal Medico
         $consultaMedicos = "SELECT * FROM personalmedico WHERE correo = '$usuario'";
         $verifica_usuario_medico = mysqli_query($conexion, $consultaMedicos);
-        $filasPM = mysqli_num_rows($verifica_usuario_medico);
+        $filasPM = mysqli_num_rows($verifica_usuario_medico);//Se almacena numero de filas
 
 
         if ( $filasPacientes > 0){
-            $row = $verifica_usuario_paciente -> fetch_assoc();
-            //while ($row = $verifica_usuario_paciente -> fetch_assoc() ){
-              //var_dump($row);
-            //}
-            $hash = trim($row['pass']);
-            echo "<br />". $hash . "<br />";
-            
-            if( !(password_verify($passLogin, $hash)) ){
-                echo "El usuario no existe m";
+            $row = $verifica_usuario_paciente -> fetch_assoc(); //Se almacena toda la fila
+            $hash = trim($row['pass']); //Se obtiene el hash  
+            if( !(password_verify($passLogin, $hash)) ){ //Se comprueba el hash con la contraseña introducida
+                echo "El usuario no existe";
                 exit;
             }
-            else{
+            else{//si la comparacion es correcta se ejecuta este bloque
                 echo "La contraseña es correcta <br/>";
                 session_start();
                 echo " El usuario es correcto <br/>";
@@ -43,20 +36,12 @@
             mysqli_close($conexion); //Se cierra conexion
         }elseif ($filasPM > 0 ) {
             $row = $verifica_usuario_medico -> fetch_assoc();
-
-            //while ($row = $verifica_usuario_paciente -> fetch_assoc() ){
-
-              //var_dump($row);
-            //}
-            $hash = trim($row['pass']);
-            echo "<br />". $hash . "<br />";
-        
+            $hash = trim($row['pass']);        
             if( !(password_verify($passLogin, $hash)) ){
-                echo "El usuario no existe m";
-                echo "<br /> Hola: ". $row['nombre'] . "<br />";
+                echo "El usuario no existe";
                 exit;
             }
-            else{
+            else{//Se compara si el personal es medico o de otro tipo
                 if($row['tipoPersonal'] == 'Tecnico' || $row['tipoPersonal'] == 'Administrativo' || $row['tipoPersonal'] == 'Otro'){
                     echo "La contraseña es correcta <br/>";
                     session_start();

@@ -28,14 +28,11 @@
         
         <form action="expediente.php" method="POST">
             <p>Agregue su 'contraseña' para poder ver su expediente</p>
-            <input type="text" placeholder="@+ejemplo12345" name="key" id="key" class="enviar">
+            <input type="password" placeholder="@+ejemplo12345" name="key" id="key" class="enviar">
             <input type="submit" value="Ver Expediente" class="enviar">
         </form>
             <br/>
             <br/>
-           <!-- <a href="modificarDatos.php"> Modificar datos </a>
-            <br/>
-            <br/>-->
             <a href="cerrarSesion.php"> Cerrar sesion </a>
             <br/>
             <br/>

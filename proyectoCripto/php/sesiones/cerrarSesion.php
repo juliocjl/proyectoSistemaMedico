@@ -18,7 +18,7 @@
 
 
 <?php
-    session_destroy();
+    session_destroy(); //Se destruye la sesion
     echo "hasta pronto";
-    header("location:../../../index.html");
+    header("location:../../../index.html"); //Se redirige a la pagina principal
 ?>

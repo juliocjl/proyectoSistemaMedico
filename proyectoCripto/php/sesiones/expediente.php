@@ -1,6 +1,6 @@
 <?php
 
-require('../fpdf/fpdf.php');
+require('../fpdf/fpdf.php'); // Archivo que permite generar el documento pdf
 
 class PDF extends FPDF {
 // Cabecera de página

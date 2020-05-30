@@ -1,15 +1,15 @@
 <?php
 function encrypt_aes($plaintext, $key, $iv){
-        //$key should have been previously generated in a cryptographically safe way, like openssl_random_pseudo_bytes
         
-        $cipher = "aes-128-cbc";
+        $cipher = "aes-128-cbc"; //tipo de cifrado utilizado
         
         if (in_array( $cipher, openssl_get_cipher_methods()) )
         {
             $ciphertext = openssl_encrypt($plaintext, $cipher, $key, $options=0, $iv);
-            //store $cipher, $iv, and $tag for decryption later
+            //el vector de inicializacion se genera al momento de registrar al usuario
+
     
-            return $ciphertext;
+            return $ciphertext; //Se regresa una cadena cifrada.
         }
     }
 ?>

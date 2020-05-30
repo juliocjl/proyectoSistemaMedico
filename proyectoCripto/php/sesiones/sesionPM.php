@@ -27,15 +27,13 @@
     
 
         <div class="opciones">
-            <form action="buscar.php" method="POST">
-               <!-- <input for="busqueda"> Numero de Expediente:-->
-                <label for="busqueda"> Numero de Expediente: </label>
-                <input type="text" placeholder="Ejemplo: 0101" name="busqueda" id="busqueda">
-                <input type="submit" value="Buscar">
+            <br/>
+            <br/>
+            <form action="datosTrab.php" method="POST">
+                <p>Agregue su 'contraseña' para poder ver su expediente</p>
+                <input type="password" placeholder="@+ejemplo12345" name="key" id="key" class="enviar">
+                <input type="submit" value="Ver Expediente" class="enviar">
             </form>
-            <br/>
-            <br/>
-            <a target="_blank" href="datosTrab.php"> Ver Datos del trabajador</a>
             <br/>
             <br/>
             <a href="cerrarSesion.php"> Cerrar sesion </a>
